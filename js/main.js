@@ -62,7 +62,7 @@
     }, 250);
   };
   // Hard cap: never trap the visitor behind the loader.
-  setTimeout(finishPreloader, 9000);
+  setTimeout(finishPreloader, 2000);
 
   /* ── Split text into letters (kinetic type) ──────────────── */
   const splitLetters = (el, text) => {
@@ -125,190 +125,29 @@
   attachVideo(document.getElementById("closerVideo"), "closer", { autoplay: true });
 
   /* ═══════════════════════════════════════════════════════════
-     HERO ORBIT — canvas frame scrub
-     Strategy A: pre-cache N ImageBitmaps → zero-latency scrub.
-     Strategy B (fallback): lerped video.currentTime + drawImage.
+     HERO — static portrait
      ═══════════════════════════════════════════════════════════ */
-  const canvas = document.getElementById("heroCanvas");
-  const ctx = canvas.getContext("2d");
-  const orbit = {
-    video: document.createElement("video"),
-    frames: [],
-    mode: "loading",        // loading → frames | live
-    duration: 8,
-    progress: 0,            // scroll-driven target 0..1
-    playhead: 0,            // smoothed
-    seekBusy: false,
-    ready: false,
-  };
-  orbit.video.muted = true;
-  orbit.video.playsInline = true;
-  orbit.video.preload = "auto";
-  orbit.video.crossOrigin = "anonymous";
+  const heroImage = document.getElementById("heroImage");
+  const orbit = { progress: 0, ready: false }; // keep shape for scroll hooks
 
-  const sizeCanvas = () => {
-    const raw = Math.min(window.devicePixelRatio || 1, 2);
-    // Source is 1080p — a >2048px backing store only burns GPU time.
-    const dpr = Math.min(raw, 2048 / Math.max(1, canvas.clientWidth));
-    canvas.width = Math.round(canvas.clientWidth * dpr);
-    canvas.height = Math.round(canvas.clientHeight * dpr);
-  };
-  sizeCanvas();
-  window.addEventListener("resize", () => { sizeCanvas(); orbit.dirty = true; });
-
-  // cover-fit draw (like object-fit: cover)
-  const drawCover = (source, sw, sh) => {
-    const cw = canvas.width, ch = canvas.height;
-    if (!sw || !sh || !cw || !ch) return;
-    const scale = Math.max(cw / sw, ch / sh);
-    const dw = sw * scale, dh = sh * scale;
-    ctx.drawImage(source, (cw - dw) / 2, (ch - dh) / 2, dw, dh);
+  const markHeroReady = () => {
+    if (orbit.ready) return;
+    orbit.ready = true;
+    setProgress(1, "READY");
+    finishPreloader();
   };
 
-  const frameCount = () =>
-    (CFG.scrub && (isMobile ? CFG.scrub.framesMobile : CFG.scrub.framesDesktop)) || (isMobile ? 64 : 110);
-
-  // Background upgrade: extract frames on a SECOND video element so the live
-  // scrub keeps working the whole time, then hot-swap to bitmap mode.
-  const buildFrameCache = async () => {
-    const N = frameCount();
-    const maxW = isMobile ? 960 : 1600;
-    const src = orbit.video.currentSrc || orbit.video.src;
-    const cv = document.createElement("video");
-    cv.muted = true;
-    cv.playsInline = true;
-    cv.preload = "auto";
-    if (orbit.video.crossOrigin) cv.crossOrigin = orbit.video.crossOrigin;
-    const frames = [];
-    try {
-      await new Promise((resolve, reject) => {
-        cv.addEventListener("loadedmetadata", resolve, { once: true });
-        cv.addEventListener("error", reject, { once: true });
-        setTimeout(reject, 8000);
-        cv.src = src;
-        cv.load();
-      });
-      const dur = cv.duration || orbit.duration;
-      const seekCV = (t) =>
-        new Promise((resolve) => {
-          const done = () => { cv.removeEventListener("seeked", done); resolve(); };
-          cv.addEventListener("seeked", done);
-          cv.currentTime = Math.min(Math.max(t, 0), Math.max(dur - 0.033, 0));
-          setTimeout(done, 400);
-        });
-      for (let i = 0; i < N; i++) {
-        await seekCV((i / (N - 1)) * dur);
-        const vw = cv.videoWidth, vh = cv.videoHeight;
-        if (!vw) throw new Error("no video dimensions");
-        const scale = Math.min(1, maxW / vw);
-        frames.push(await createImageBitmap(cv, {
-          resizeWidth: Math.round(vw * scale),
-          resizeHeight: Math.round(vh * scale),
-          resizeQuality: "medium",
-        }));
-      }
-      orbit.frames = frames;
-      orbit.mode = "frames";
-      orbit.dirty = true;
-      console.info("[orbit] frame cache ready — bitmap scrub engaged");
-    } catch (err) {
-      console.warn("[orbit] frame cache unavailable, staying on live-seek scrub:", err);
-      frames.forEach((b) => b.close && b.close());
+  setProgress(0.15, "LOADING");
+  if (heroImage) {
+    if (heroImage.complete && heroImage.naturalWidth) markHeroReady();
+    else {
+      heroImage.addEventListener("load", markHeroReady, { once: true });
+      heroImage.addEventListener("error", markHeroReady, { once: true });
     }
-  };
-
-  const initOrbit = () => {
-    const primary = (CFG.videos || {}).hero;
-    const fallback = (CFG.localFallbacks || {}).hero;
-    // Stage 1: CDN with CORS (enables the frame cache).
-    // Stage 2: same CDN URL without CORS (playable; live-seek scrub only).
-    // Stage 3: local placeholder.
-    let stage = 1;
-    orbit.forceLive = false;
-    orbit.video.addEventListener("error", () => {
-      if (stage === 1 && primary) {
-        stage = 2;
-        orbit.video.removeAttribute("crossorigin");
-        orbit.video.crossOrigin = null;
-        orbit.forceLive = true; // frame cache would taint — scrub live instead
-        orbit.video.src = primary;
-        orbit.video.load();
-      } else if (stage <= 2 && fallback) {
-        stage = 3;
-        orbit.video.crossOrigin = null;
-        orbit.forceLive = false; // local file is same-origin: cache allowed
-        orbit.video.src = fallback;
-        orbit.video.load();
-      } else {
-        orbit.mode = "live";
-        orbit.ready = true;
-        finishPreloader();
-      }
-    });
-    orbit.video.addEventListener("loadedmetadata", () => {
-      orbit.duration = orbit.video.duration || 8;
-      setProgress(0.55, "CALIBRATING ORBIT");
-    });
-    // Scrubbable the moment first frames can render — no dead window after
-    // refresh. The bitmap cache then upgrades smoothness in the background.
-    orbit.video.addEventListener("canplay", () => {
-      if (orbit.ready) return;
-      orbit.mode = "live";
-      orbit.ready = true;
-      orbit.dirty = true;
-      setProgress(1);
-      finishPreloader();
-      if (!orbit.forceLive) buildFrameCache();
-    });
-    setProgress(0.05, "FETCHING FILM");
-    if (!primary && fallback) { orbit.video.crossOrigin = null; }
-    orbit.video.src = primary || fallback || "";
-    orbit.video.load();
-  };
-  initOrbit();
-
-  /* render loop — draws only when the playhead moved */
-  let lastDrawnFrame = -1;
-  const render = () => {
-    if (orbit.ready) {
-      const lerpAmt = (CFG.scrub && CFG.scrub.lerp) || 0.12;
-      orbit.playhead += (orbit.progress - orbit.playhead) * lerpAmt;
-      if (Math.abs(orbit.progress - orbit.playhead) < 0.0004) orbit.playhead = orbit.progress;
-
-      if (orbit.mode === "frames" && orbit.frames.length) {
-        const idx = Math.min(
-          orbit.frames.length - 1,
-          Math.round(orbit.playhead * (orbit.frames.length - 1))
-        );
-        if (idx !== lastDrawnFrame || orbit.dirty) {
-          const f = orbit.frames[idx];
-          drawCover(f, f.width, f.height);
-          lastDrawnFrame = idx;
-          orbit.dirty = false;
-        }
-      } else if (orbit.mode === "live") {
-        const t = orbit.playhead * orbit.duration;
-        if (!orbit.seekBusy && Math.abs(orbit.video.currentTime - t) > 0.02) {
-          orbit.seekBusy = true;
-          const unlock = () => { orbit.seekBusy = false; };
-          orbit.video.addEventListener("seeked", unlock, { once: true });
-          try {
-            if (orbit.video.fastSeek) orbit.video.fastSeek(t);
-            else orbit.video.currentTime = t;
-          } catch (_) { orbit.seekBusy = false; }
-          setTimeout(unlock, 120);
-        }
-        const ct = orbit.video.currentTime;
-        if (orbit.video.videoWidth && (orbit.dirty || Math.abs(ct - (orbit.lastLiveTime ?? -1)) > 0.001)) {
-          drawCover(orbit.video, orbit.video.videoWidth, orbit.video.videoHeight);
-          orbit.lastLiveTime = ct;
-          orbit.dirty = false;
-        }
-      }
-    }
-    requestAnimationFrame(render);
-  };
-  requestAnimationFrame(render);
+  } else {
+    markHeroReady();
+  }
+  setTimeout(markHeroReady, 1500);
 
   /* ── Scroll choreography ─────────────────────────────────── */
   const heroLetters = document.querySelectorAll(".hero__title .ltr");
@@ -319,27 +158,27 @@
   if (!reduceMotion) {
     /* Hero intro: letters rise in as soon as the preloader clears */
     const playHeroIntro = () => {
-      const tl = gsap.timeline({ delay: 0.15 });
-      tl.to(heroEyebrow, { opacity: 1, duration: 0.6, ease: "power2.out" })
-        .to(heroLetters, {
-          opacity: 1, y: 0, rotate: 0,
-          duration: 0.9, ease: "power4.out", stagger: 0.045,
-        }, 0.1)
-        .to(heroSubtitle, { opacity: 1, duration: 0.7, ease: "power2.out" }, 0.8);
+      gsap.fromTo(
+        [heroEyebrow, heroLetters, heroSubtitle],
+        { opacity: 0.4, y: 10 },
+        { opacity: 1, y: 0, duration: 0.7, ease: "power3.out", stagger: 0.02, overwrite: true }
+      );
     };
     onPreloaderDone = playHeroIntro;
     if (preloaderDone) playHeroIntro(); // preloader may have beaten us here
 
-    /* Hero: scroll drives the orbit scrub, hint fade and title scale-out */
+    /* Hero: ken-burns on portrait + hint/title fade */
     const heroTl = gsap.timeline({
       scrollTrigger: {
         trigger: "#hero",
         start: "top top",
         end: "bottom bottom",
         scrub: true,
-        onUpdate: (st) => { orbit.progress = st.progress; },
       },
     });
+    if (heroImage) {
+      heroTl.fromTo(heroImage, { scale: 1.04 }, { scale: 1.12, ease: "none", duration: 1 }, 0);
+    }
     heroTl
       .to(heroHint, { opacity: 0, duration: 0.08, immediateRender: false }, 0.06)
       .to("#heroTitle", { scale: 0.94, yPercent: -4, ease: "none", duration: 0.4 }, 0.55)

@@ -173,17 +173,21 @@ a { color: inherit; text-decoration: none; }
 .nav__links a:hover::after { transform: scaleX(1); transform-origin: left; }
 
 /* ── HERO ──────────────────────────────────────────────────── */
-.hero { height: 460vh; position: relative; }
+.hero { height: 160vh; position: relative; }
 .hero__pin {
   position: sticky; top: 0;
   height: 100vh; height: 100svh;
   overflow: hidden;
 }
-.hero__canvas {
+.hero__canvas,
+.hero__bg {
   position: absolute; inset: 0;
   width: 100%; height: 100%;
   display: block;
   background: var(--ink);
+  object-fit: cover;
+  object-position: center 25%;
+  transform: scale(1.04);
 }
 .hero__vignette {
   position: absolute; inset: 0;
@@ -203,7 +207,7 @@ a { color: inherit; text-decoration: none; }
 .hero__eyebrow {
   font-size: 11px; color: var(--cream-dim);
   margin-bottom: clamp(10px, 2vh, 22px);
-  opacity: 0;
+  opacity: 1;
 }
 .hero__title {
   font-family: var(--display);
@@ -219,8 +223,8 @@ a { color: inherit; text-decoration: none; }
 .hero__word--accent { color: var(--emerald); }
 .hero__word .ltr {
   display: inline-block;
-  opacity: 0;
-  transform: translateY(0.35em) rotate(2deg);
+  opacity: 1;
+  transform: none;
   will-change: transform, opacity;
 }
 .hero__subtitle {
@@ -230,7 +234,7 @@ a { color: inherit; text-decoration: none; }
   text-transform: uppercase;
   color: var(--cream);
   margin-top: clamp(16px, 3vh, 34px);
-  opacity: 0;
+  opacity: 1;
 }
 .hero__hint {
   position: absolute; bottom: 34px; left: 50%;
@@ -507,7 +511,7 @@ a { color: inherit; text-decoration: none; }
 
 /* ── RESPONSIVE ────────────────────────────────────────────── */
 @media (max-width: 720px) {
-  .hero { height: 380vh; }
+  .hero { height: 140vh; }
   .pillars { height: 320vh; }
   .nav__links a:not(:last-child) { display: none; }
   .pillar__title { font-size: clamp(48px, 15vw, 80px); }
