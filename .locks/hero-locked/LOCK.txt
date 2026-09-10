@@ -1,0 +1,13 @@
+LOCKED HERO STILL — 2026-09-10
+Commit: fd66bd2f5f02daeb9fe4595cdf89e02130a94b7b
+Tag: hero-locked
+Message: First-style hero composite with subject centered
+Live: https://kevin-costner-portfolio.vercel.app
+Asset: assets/hero.jpg (cutout on dark bg + soft glow, subject centered)
+Cache query at lock: ?v=first2
+
+If user says "revert" (or equivalent), restore ONLY to this lock point:
+1. git checkout hero-locked -- assets/hero.jpg index.html (or reset files from this snapshot)
+2. Prefer restoring from .locks/hero-locked/ if working tree differs
+3. Redeploy with a new cache-bust query if needed
+4. Do NOT revert further back to amber/white/frosty experiments or pre-composite states

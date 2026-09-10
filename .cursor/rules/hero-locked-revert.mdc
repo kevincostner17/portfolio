@@ -1,0 +1,25 @@
+---
+description: Locked portfolio hero still — "revert" means restore this point only
+alwaysApply: true
+---
+
+# Locked hero still (do not lose)
+
+**Lock point (only revert target):**
+- Git tag: `hero-locked`
+- Commit: `fd66bd2f5f02daeb9fe4595cdf89e02130a94b7b`
+- Snapshot: `.locks/hero-locked/` (`hero.jpg`, `LOCK.txt`)
+- Live: https://kevin-costner-portfolio.vercel.app
+
+**What is locked:** Dark cinematic hero with Kevin cut out on black, soft glow behind subject, subject centered. File: `assets/hero.jpg`. Not raw crop, not amber/orange, not white theme, not frosty experiments.
+
+## When the user says "revert" / "go back" / "undo hero" / "restore the still"
+
+Restore **only** this lock — nothing earlier:
+
+1. Restore `assets/hero.jpg` from `.locks/hero-locked/hero.jpg` (or `git checkout hero-locked -- assets/hero.jpg`).
+2. Restore hero `<img>` / preload wiring from the lock if changed (see `.locks/hero-locked/index.html` or tag).
+3. Bump the `?v=` cache-bust on `hero.jpg` in `index.html`, commit as Kevin Costner (no Cursor co-author), push, `vercel --prod --yes`.
+4. **Do not** revert to pre-lock experiments (amber glow, white theme, frosty cutouts, Bui face videos in hero, left-weighted composites).
+
+Do not delete the tag `hero-locked` or `.locks/hero-locked/` unless the user explicitly replaces the lock with a new one.
