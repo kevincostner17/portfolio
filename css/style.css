@@ -186,7 +186,7 @@ a { color: inherit; text-decoration: none; }
   display: block;
   background: var(--ink);
   object-fit: cover;
-  object-position: center 25%;
+  object-position: center center;
   transform: scale(1.04);
 }
 .hero__vignette {
