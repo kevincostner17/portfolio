@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<script>if ("scrollRestoration" in history) history.scrollRestoration = "manual";</script>
+<title>Kevin Costner - AI/ML Engineer</title>
+<meta name="description" content="Kevin Costner - AI/ML Engineer. Agentic RAG, healthcare ML, and production pipelines — built cinematic." />
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='10' fill='%23060706'/%3E%3Cg transform='translate(32 32) scale(1.28) translate(-32 -32)'%3E%3Cpath d='M14 10 L14 54 M14 34 L38 10 M14 34 L40 54' stroke='%23F2EBDD' stroke-width='7' stroke-linecap='square' stroke-linejoin='miter' fill='none'/%3E%3Cpath d='M40 54 L50 54 L50 34 L40 34' stroke='%23F2EBDD' stroke-width='7' stroke-linecap='square' stroke-linejoin='miter' fill='none'/%3E%3C/g%3E%3C/svg%3E" />
+<link rel="preload" as="video" type="video/mp4" href="assets/hero-orbit.mp4" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<!-- ══════════ PRELOADER ══════════ -->
+<div class="preloader" id="preloader" aria-hidden="true">
+  <div class="preloader__mark-stage" aria-hidden="true">
+    <div class="preloader__mark-flip">
+      <svg class="preloader__mark" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="blingGrad" gradientUnits="userSpaceOnUse" x1="-40" y1="-40" x2="0" y2="0">
+            <stop offset="0%"   stop-color="#F2EBDD"/>
+            <stop offset="42%"  stop-color="#F2EBDD"/>
+            <stop offset="50%"  stop-color="#ffffff"/>
+            <stop offset="58%"  stop-color="#F2EBDD"/>
+            <stop offset="100%" stop-color="#F2EBDD"/>
+            <animateTransform attributeName="gradientTransform" type="translate"
+              values="-90 -90; 0 0; 150 150; 150 150" keyTimes="0; 0.15; 0.55; 1"
+              dur="2.6s" repeatCount="indefinite"/>
+          </linearGradient>
+        </defs>
+        <path d="M14 10 L14 54 M14 34 L38 10 M14 34 L40 54" stroke="url(#blingGrad)" stroke-width="7" stroke-linecap="square" stroke-linejoin="miter"/>
+        <path d="M40 54 L50 54 L50 34 L40 34" stroke="url(#blingGrad)" stroke-width="7" stroke-linecap="square" stroke-linejoin="miter" fill="none"/>
+      </svg>
+    </div>
+    <span class="preloader__spark preloader__spark--a">✦</span>
+    <span class="preloader__spark preloader__spark--b">✦</span>
+    <span class="preloader__spark preloader__spark--c">✦</span>
+  </div>
+  <div class="preloader__status"><span id="preloaderLabel">CALIBRATING ORBIT</span><span id="preloaderPct">0%</span></div>
+  <div class="preloader__bar"><div class="preloader__fill" id="preloaderFill"></div></div>
+</div>
+
+<!-- ══════════ GRAIN ══════════ -->
+<div class="grain" aria-hidden="true"></div>
+
+<!-- ══════════ NAV ══════════ -->
+<header class="nav">
+  <a class="nav__mark" href="#top" aria-label="Kevin Costner - home">
+    <span class="nav__mark-stage">
+      <span class="nav__mark-flip">
+        <svg class="nav__mark-icon" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <defs>
+            <linearGradient id="navBlingGrad" gradientUnits="userSpaceOnUse" x1="-40" y1="-40" x2="0" y2="0">
+              <stop offset="0%"   stop-color="#F2EBDD"/>
+              <stop offset="42%"  stop-color="#F2EBDD"/>
+              <stop offset="50%"  stop-color="#ffffff"/>
+              <stop offset="58%"  stop-color="#F2EBDD"/>
+              <stop offset="100%" stop-color="#F2EBDD"/>
+              <animateTransform attributeName="gradientTransform" type="translate"
+                values="-90 -90; 0 0; 150 150; 150 150" keyTimes="0; 0.15; 0.55; 1"
+                dur="2.6s" repeatCount="indefinite"/>
+            </linearGradient>
+          </defs>
+          <path d="M14 10 L14 54 M14 34 L38 10 M14 34 L40 54" stroke="url(#navBlingGrad)" stroke-width="7" stroke-linecap="square" stroke-linejoin="miter"/>
+          <path d="M40 54 L50 54 L50 34 L40 34" stroke="url(#navBlingGrad)" stroke-width="7" stroke-linecap="square" stroke-linejoin="miter" fill="none"/>
+        </svg>
+      </span>
+      <span class="nav__spark nav__spark--a">✦</span>
+      <span class="nav__spark nav__spark--b">✦</span>
+      <span class="nav__spark nav__spark--c">✦</span>
+    </span>
+  </a>
+  <nav class="nav__links">
+    <a href="#about">About</a>
+    <a href="#experience">Experience</a>
+    <a href="#work">Work</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<main id="top">
+
+  <!-- ══════════ ACT I · HERO ORBIT ══════════ -->
+  <section class="hero" id="hero">
+    <div class="hero__pin">
+      <canvas class="hero__canvas" id="heroCanvas" aria-label="Cinematic orbit of Kevin Costner"></canvas>
+      <div class="hero__vignette"></div>
+
+      <div class="hero__type">
+        <p class="hero__eyebrow mono" id="heroEyebrow">PORTFOLIO · HYDERABAD, IN</p>
+        <h1 class="hero__title" id="heroTitle" aria-label="Kevin Costner">
+          <span class="hero__word" data-word="KEVIN"></span>
+          <span class="hero__word hero__word--accent" data-word="COSTNER"></span>
+        </h1>
+        <p class="hero__subtitle" id="heroSubtitle">AI/ML&nbsp;Engineer</p>
+      </div>
+
+      <div class="hero__hint mono" id="heroHint">
+        <span>SCROLL TO ORBIT</span>
+        <span class="hero__hint-line"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ STATS STRIP ══════════ -->
+  <section class="stats" id="stats">
+    <div class="stats__rail">
+      <div class="stat" data-count="8" data-suffix="+"><span class="stat__num mono">0</span><span class="stat__label">Featured Builds</span></div>
+      <div class="stat" data-count="5" data-suffix="+"><span class="stat__num mono">0</span><span class="stat__label">OSS Org PRs</span></div>
+      <div class="stat" data-count="1" data-suffix="st"><span class="stat__num mono">0</span><span class="stat__label">Hackathon Rank</span></div>
+      <div class="stat" data-count="2" data-suffix=""><span class="stat__num mono">0</span><span class="stat__label">Live Demos</span></div>
+    </div>
+  </section>
+
+  <!-- ══════════ MANIFESTO ══════════ -->
+  <section class="manifesto" id="about">
+    <p class="section-eyebrow mono" data-reveal>THE ENGINEER BEHIND THE PIPELINES</p>
+    <h2 class="manifesto__quote" data-reveal>"Turning messy <span class="accent">data</span><br>into grounded AI <span class="accent">decisions</span>."</h2>
+    <div class="manifesto__body">
+      <p data-reveal>I'm an AI/ML engineer based in Hyderabad. I specialize in end-to-end machine learning pipelines, explainable data-cleaning systems, and production AI — from classification models in healthcare to agentic RAG over financial documents.</p>
+      <p data-reveal>Hands-on with Cursor and Claude for AI-assisted development and prompt engineering. Open-source contributor to FreshCode-Org's freshdata-cleaner. Proven capability in classification for healthcare and marketing use cases.</p>
+      <p data-reveal>Every build starts with the same question: what does the data actually support — and how do we ship it with an audit trail?</p>
+    </div>
+  </section>
+
+  <!-- ══════════ ACT II · THREE PILLARS ══════════ -->
+  <section class="pillars" id="pillars">
+    <div class="pillars__pin">
+      <video class="bgvideo" id="builderVideo" muted loop playsinline preload="metadata"></video>
+      <div class="scrim"></div>
+
+      <div class="pillars__stage">
+        <p class="section-eyebrow mono">WHAT I BUILD WITH</p>
+        <div class="pillar" data-pillar="0">
+          <h2 class="pillar__title">Agentic<br>RAG</h2>
+          <p class="pillar__line">Autonomous agents that decide when to retrieve, then ground answers in document context.</p>
+        </div>
+        <div class="pillar" data-pillar="1">
+          <h2 class="pillar__title">Machine<br>Learning</h2>
+          <p class="pillar__line">Classification pipelines trained, evaluated, and leakage-checked until the metrics hold.</p>
+        </div>
+        <div class="pillar" data-pillar="2">
+          <h2 class="pillar__title">Full-Stack<br>Shipping</h2>
+          <p class="pillar__line">Streamlit demos, Next.js apps, and CI/CD so prototypes leave the notebook.</p>
+        </div>
+      </div>
+
+      <div class="pillars__index mono" id="pillarsIndex"><span id="pillarCurrent">RAG</span></div>
+    </div>
+  </section>
+
+  <!-- ══════════ TOOLBOX ══════════ -->
+  <section class="toolbox" id="toolbox">
+    <p class="section-eyebrow mono" data-reveal>THE TOOLBOX</p>
+    <div class="toolbox__grid">
+      <div class="tool" data-reveal>
+        <h3 class="tool__name">Machine Learning</h3>
+        <ul class="tool__list">
+          <li>KNN</li><li>Logistic Regression</li><li>SVM</li><li>Decision Trees</li><li>Random Forest</li><li>Feature Engineering</li><li>Model Evaluation</li>
+        </ul>
+      </div>
+      <div class="tool" data-reveal>
+        <h3 class="tool__name">Data Science</h3>
+        <ul class="tool__list">
+          <li>Python</li><li>pandas</li><li>NumPy</li><li>EDA</li><li>Outlier Detection</li><li>Matplotlib</li><li>Seaborn</li>
+        </ul>
+      </div>
+      <div class="tool" data-reveal>
+        <h3 class="tool__name">Deep Learning &amp; LLMs</h3>
+        <ul class="tool__list">
+          <li>CrewAI</li><li>LangChain</li><li>ChromaDB</li><li>Ollama</li><li>Hugging Face</li><li>TensorFlow</li><li>CNN / RNN / NLP</li>
+        </ul>
+      </div>
+      <div class="tool" data-reveal>
+        <h3 class="tool__name">Tools &amp; Engineering</h3>
+        <ul class="tool__list">
+          <li>Scikit-learn</li><li>Streamlit</li><li>SQL / MySQL</li><li>Git</li><li>Jupyter</li><li>Next.js</li><li>Docker</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ EXPERIENCE ══════════ -->
+  <section class="xp" id="experience">
+    <p class="section-eyebrow mono" data-reveal>WHERE THE WORK COMES FROM</p>
+    <h2 class="xp__heading" data-reveal>Experience</h2>
+    <div class="xp__list">
+      <article class="xp__row" data-reveal>
+        <div class="xp__logo mono" data-logo="innomatics"><span>IN</span></div>
+        <div class="xp__when mono">JAN 2026 – AUG 2026</div>
+        <div class="xp__what">
+          <h3 class="xp__role">Data Science &amp; AI Program <span class="xp__org">/ Innomatics Research Labs</span></h3>
+          <p class="xp__impact">LLMs, Generative AI, and production-scale model deployment. Built classification and RAG-oriented systems with Python, Scikit-learn, and modern LLM tooling.</p>
+        </div>
+      </article>
+      <article class="xp__row" data-reveal>
+        <div class="xp__logo mono" data-logo="freshcode"><span>FC</span></div>
+        <div class="xp__when mono">MAY 2026 – PRESENT</div>
+        <div class="xp__what">
+          <h3 class="xp__role">Open-Source Contributor <span class="xp__org">/ FreshCode-Org · freshdata-cleaner</span></h3>
+          <p class="xp__impact">Explainable Python data-cleaning library for pandas: missing-value handling, outlier detection, dtype repair, and duplicate resolution with a clear audit trail. Hardened Core API outlier detection for boolean columns on mixed-type DataFrames.</p>
+        </div>
+      </article>
+      <article class="xp__row" data-reveal>
+        <div class="xp__logo mono" data-logo="mallareddy"><span>MR</span></div>
+        <div class="xp__when mono">JAN 2025 – APR 2025</div>
+        <div class="xp__what">
+          <h3 class="xp__role">B.Tech Final Year Project <span class="xp__org">/ Mallareddy University</span></h3>
+          <p class="xp__impact">Glaucoma Detection System — predictive healthcare pipeline on 5,000+ patient records. Benchmarked SVM, KNN, Random Forests, and Decision Trees; automated cleaning and precision-recall evaluation across demographics.</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ══════════ ACT III · WORK ══════════ -->
+  <section class="work" id="work">
+    <video class="bgvideo bgvideo--fixedish" id="closerVideo" muted loop playsinline preload="metadata"></video>
+    <div class="scrim scrim--work"></div>
+
+    <div class="work__inner">
+      <div class="orbit-badge" aria-hidden="true">
+        <svg viewBox="0 0 100 100">
+          <defs>
+            <path id="badgeCircle" d="M50,50 m-38,0 a38,38 0 1,1 76,0 a38,38 0 1,1 -76,0"/>
+          </defs>
+          <text class="orbit-badge__text">
+            <textPath href="#badgeCircle" textLength="238" lengthAdjust="spacingAndGlyphs">SELECTED WORK · KEVIN COSTNER · AI/ML · </textPath>
+          </text>
+        </svg>
+        <span class="orbit-badge__arrow">↓</span>
+      </div>
+      <p class="section-eyebrow mono">SELECTED WORK</p>
+      <h2 class="work__heading">Three builds<br>that <span class="accent">earn the title.</span></h2>
+
+      <div class="cards">
+        <article class="card" tabindex="0">
+          <div class="card__inner">
+            <div class="card__face card__front">
+              <div class="card__tag mono">AGENTIC RAG · CREWAI</div>
+              <h3 class="card__title">End-to-End Agentic RAG</h3>
+              <p class="card__pitch">PyPDF extraction, chunking, MiniLM embeddings in ChromaDB, and a CrewAI retrieval tool.</p>
+              <div class="card__foot mono"><span>TOP-3 RETRIEVAL</span><a class="card__arrow" href="https://github.com/kevincostner17/agentic-rag-system" target="_blank" rel="noopener" aria-label="View Agentic RAG on GitHub" tabindex="-1">→</a></div>
+            </div>
+            <div class="card__face card__back">
+              <div class="card__tag mono">THE DETAIL</div>
+              <p class="card__detail">Assembled an agentic document-analysis system with 800-char / 150-overlap chunking. Exposed top-3 semantic retrieval so an Ollama Llama 3.2 agent autonomously decides when to search and grounds financial answers in retrieved context.</p>
+              <div class="card__foot mono"><span>PYTHON · CREWAI · LANGCHAIN · CHROMADB</span><a class="card__arrow" href="https://github.com/kevincostner17/agentic-rag-system" target="_blank" rel="noopener" aria-label="View Agentic RAG on GitHub" tabindex="-1">→</a></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="card" tabindex="0">
+          <div class="card__inner">
+            <div class="card__face card__front">
+              <div class="card__tag mono">HEALTHCARE · PYTORCH</div>
+              <h3 class="card__title">CareTriage</h3>
+              <p class="card__pitch">30-day diabetic readmission risk ranking on UCI inpatient data with a live Streamlit demo.</p>
+              <div class="card__foot mono"><span>LIVE DEMO</span><a class="card__arrow" href="https://github.com/kevincostner17/care-triage" target="_blank" rel="noopener" aria-label="View CareTriage on GitHub" tabindex="-1">→</a></div>
+            </div>
+            <div class="card__face card__back">
+              <div class="card__tag mono">THE DETAIL</div>
+              <p class="card__detail">Capacity-constrained outreach scenarios with isotonic calibration and subgroup fairness audits. Gradient-based attributions, model card, and a deployed Streamlit demo.</p>
+              <div class="card__foot mono"><span>PYTHON · PYTORCH · STREAMLIT</span><a class="card__arrow" href="https://care-triage-srhikwyuzdjah3ohfeajju.streamlit.app/" target="_blank" rel="noopener" aria-label="Open CareTriage demo" tabindex="-1">→</a></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="card" tabindex="0">
+          <div class="card__inner">
+            <div class="card__face card__front">
+              <div class="card__tag mono">OPEN SOURCE · PANDAS</div>
+              <h3 class="card__title">freshdata-cleaner</h3>
+              <p class="card__pitch">Explainable pandas data-cleaning library with a clear audit trail of every change.</p>
+              <div class="card__foot mono"><span>OSS</span><a class="card__arrow" href="https://github.com/FreshCode-Org/freshdata" target="_blank" rel="noopener" aria-label="View freshdata on GitHub" tabindex="-1">→</a></div>
+            </div>
+            <div class="card__face card__back">
+              <div class="card__tag mono">THE DETAIL</div>
+              <p class="card__detail">Contributed Core API outlier-detection fixes for boolean columns, reviewed pipeline edge cases on real datasets, and shipped clean Python/Pandas PRs to FreshCode-Org.</p>
+              <div class="card__foot mono"><span>PYTHON · PANDAS · FRESHCODE-ORG</span><a class="card__arrow" href="https://github.com/FreshCode-Org/freshdata" target="_blank" rel="noopener" aria-label="View freshdata on GitHub" tabindex="-1">→</a></div>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <p class="section-eyebrow mono work__more-label" data-reveal>MORE BUILDS</p>
+      <div class="minis">
+        <a class="mini" data-reveal href="https://github.com/kevincostner17/g2c" target="_blank" rel="noopener">
+          <h4 class="mini__title">TalentBoard</h4>
+          <p class="mini__pitch">Tech jobs marketplace for seekers and employers — search, filters, posting flow, REST API, Vercel CI/CD.</p>
+          <span class="mini__tools mono">NEXT.JS · TYPESCRIPT · TAILWIND</span>
+        </a>
+        <a class="mini" data-reveal href="https://github.com/kevincostner17/hackathon" target="_blank" rel="noopener">
+          <h4 class="mini__title">PharmaHub Pro</h4>
+          <p class="mini__pitch">Pharmacy management MVP with FastAPI services, React POS, RBAC, and AI anomaly scoring.</p>
+          <span class="mini__tools mono">FASTAPI · POSTGRESQL · REDIS</span>
+        </a>
+        <a class="mini" data-reveal href="https://github.com/kevincostner17/clinical-diagnostic-ann" target="_blank" rel="noopener">
+          <h4 class="mini__title">Clinical Diagnostic ANN</h4>
+          <p class="mini__pitch">Multi-label healthcare disease risk ANN with TensorFlow and a Streamlit demo.</p>
+          <span class="mini__tools mono">TENSORFLOW · STREAMLIT</span>
+        </a>
+        <a class="mini" data-reveal href="https://github.com/kevincostner17/dss-cctv-website" target="_blank" rel="noopener">
+          <h4 class="mini__title">DSS CCTV Website</h4>
+          <p class="mini__pitch">Product catalog site for Dhanalakshmi Security Service CCTV offerings.</p>
+          <span class="mini__tools mono">HTML · CSS · LIVE SITE</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ AWARDS & CREDENTIALS ══════════ -->
+  <section class="awards" id="awards">
+    <p class="section-eyebrow mono" data-reveal>PROOF OF WORK</p>
+    <h2 class="awards__heading" data-reveal>Awards &amp;<br><span class="accent">certifications.</span></h2>
+    <div class="awards__list">
+      <div class="award" data-reveal>
+        <span class="award__year mono">2024</span>
+        <div>
+          <h3 class="award__name">Hackathon Champion — 1st Place <span class="award__scope mono">GRIET</span></h3>
+          <p class="award__for">1st among 140 teams; optimized algorithmic logic in a 24-hour sprint.</p>
+        </div>
+      </div>
+      <div class="award" data-reveal>
+        <span class="award__year mono">2024</span>
+        <div>
+          <h3 class="award__name">Deep Learning Certification</h3>
+          <p class="award__for">IIT Madras (NPTEL) — November 2023 – April 2024. Neural networks and deep learning foundations.</p>
+        </div>
+      </div>
+      <div class="award" data-reveal>
+        <span class="award__year mono">2024</span>
+        <div>
+          <h3 class="award__name">IoT Certification</h3>
+          <p class="award__for">IIT Kharagpur (NPTEL) — June 2024 – November 2024. IoT systems and connected applications.</p>
+        </div>
+      </div>
+    </div>
+    <div class="creds-grid">
+      <div class="credcol" data-reveal>
+        <h3 class="credcol__title mono">EDUCATION</h3>
+        <div class="cred">
+          <p class="cred__name">B.Tech in Artificial Intelligence &amp; Machine Learning <span class="cred__meta mono">MALLAREDDY · 2025</span></p>
+          <p class="cred__detail">CGPA 8.12/10.0 · August 2021 – May 2025 · Hyderabad, Telangana · Coursework: Neural Networks, Reinforcement Learning, Computer Vision, NLP, Data Mining, DBMS, OS</p>
+        </div>
+      </div>
+      <div class="credcol" data-reveal>
+        <h3 class="credcol__title mono">CERTIFICATIONS</h3>
+        <div class="cred">
+          <p class="cred__name">Data Science &amp; AI Program <span class="cred__meta mono">INNOMATICS · 2026</span></p>
+          <p class="cred__detail">LLMs, Generative AI, and production-scale model deployment</p>
+        </div>
+        <div class="cred">
+          <p class="cred__name">Deep Learning <span class="cred__meta mono">IIT-M NPTEL · 2024</span></p>
+          <p class="cred__detail">Neural networks and deep learning</p>
+        </div>
+        <div class="cred">
+          <p class="cred__name">Internet of Things <span class="cred__meta mono">IIT-K NPTEL · 2024</span></p>
+          <p class="cred__detail">IoT systems and applications</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ FINALE ══════════ -->
+  <section class="finale" id="contact">
+    <h2 class="finale__title" id="finaleTitle" aria-label="Let's build the future with AI.">
+      <span class="finale__row" data-line="LET'S BUILD"></span>
+      <span class="finale__row finale__row--accent" data-line="THE FUTURE"></span>
+      <span class="finale__row" data-line="WITH AI."></span>
+    </h2>
+    <p class="finale__lede" data-reveal>Ready to ship the next pipeline? Whether it's agentic RAG, healthcare ML, or a production demo — let's talk.</p>
+    <div class="finale__cta">
+      <a class="btn btn--solid" id="btnEmail" href="mailto:siravenikevin@gmail.com">Start a conversation</a>
+      <a class="btn btn--ghost" id="btnGithub" href="https://github.com/kevincostner17" target="_blank" rel="noopener">See the code</a>
+    </div>
+  </section>
+
+  <!-- ══════════ FOOTER ══════════ -->
+  <footer class="footer">
+    <div class="footer__links">
+      <a class="footer__link" id="linkLinkedin" href="#" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        <span>LinkedIn</span>
+      </a>
+      <a class="footer__link" id="linkGithub" href="#" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.756-1.333-1.756-1.089-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.955-.266 1.98-.399 3-.405 1.02.006 2.045.139 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+        <span>GitHub</span>
+      </a>
+      <a class="footer__link" id="linkFacebook" href="#" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2L2 7l10 5 10-5-10-5zm0 9l-8-4v6c0 2.5 3.5 4.5 8 4.5s8-2 8-4.5V7l-8 4z"/></svg>
+        <span>TalentBoard</span>
+      </a>
+      <a class="footer__link" id="linkEmail" href="#">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18v12H3z"/><path d="M3 6l9 7 9-7"/></svg>
+        <span>Email</span>
+      </a>
+    </div>
+    <p class="footer__note mono">© 2026 SIRAVENI KEVIN COSTNER LINGAIAH</p>
+  </footer>
+
+</main>
+
+<script src="config.js"></script>
+<script src="vendor/lenis.min.js"></script>
+<script src="vendor/gsap.min.js"></script>
+<script src="vendor/ScrollTrigger.min.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
