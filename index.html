@@ -6,40 +6,17 @@
 <script>if ("scrollRestoration" in history) history.scrollRestoration = "manual";</script>
 <title>Kevin Costner - AI/ML Engineer</title>
 <meta name="description" content="Kevin Costner - AI/ML Engineer. Agentic RAG, healthcare ML, and production pipelines — built cinematic." />
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='10' fill='%23060706'/%3E%3Cg transform='translate(32 32) scale(1.28) translate(-32 -32)'%3E%3Cpath d='M14 10 L14 54 M14 34 L38 10 M14 34 L40 54' stroke='%23F2EBDD' stroke-width='7' stroke-linecap='square' stroke-linejoin='miter' fill='none'/%3E%3Cpath d='M40 54 L50 54 L50 34 L40 34' stroke='%23F2EBDD' stroke-width='7' stroke-linecap='square' stroke-linejoin='miter' fill='none'/%3E%3C/g%3E%3C/svg%3E" />
+<link rel="icon" type="image/png" href="assets/favicon-kc.png" />
 <link rel="preload" as="image" href="assets/hero.jpg?v=first2" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css" />
+<link rel="stylesheet" href="css/style.css?v=hq1" />
 </head>
 <body>
 
 <!-- ══════════ PRELOADER ══════════ -->
 <div class="preloader" id="preloader" aria-hidden="true">
-  <div class="preloader__mark-stage" aria-hidden="true">
-    <div class="preloader__mark-flip">
-      <svg class="preloader__mark" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <linearGradient id="blingGrad" gradientUnits="userSpaceOnUse" x1="-40" y1="-40" x2="0" y2="0">
-            <stop offset="0%"   stop-color="#F2EBDD"/>
-            <stop offset="42%"  stop-color="#F2EBDD"/>
-            <stop offset="50%"  stop-color="#ffffff"/>
-            <stop offset="58%"  stop-color="#F2EBDD"/>
-            <stop offset="100%" stop-color="#F2EBDD"/>
-            <animateTransform attributeName="gradientTransform" type="translate"
-              values="-90 -90; 0 0; 150 150; 150 150" keyTimes="0; 0.15; 0.55; 1"
-              dur="2.6s" repeatCount="indefinite"/>
-          </linearGradient>
-        </defs>
-        <path d="M14 10 L14 54 M14 34 L38 10 M14 34 L40 54" stroke="url(#blingGrad)" stroke-width="7" stroke-linecap="square" stroke-linejoin="miter"/>
-        <path d="M40 54 L50 54 L50 34 L40 34" stroke="url(#blingGrad)" stroke-width="7" stroke-linecap="square" stroke-linejoin="miter" fill="none"/>
-      </svg>
-    </div>
-    <span class="preloader__spark preloader__spark--a">✦</span>
-    <span class="preloader__spark preloader__spark--b">✦</span>
-    <span class="preloader__spark preloader__spark--c">✦</span>
-  </div>
   <div class="preloader__status"><span id="preloaderLabel">LOADING</span><span id="preloaderPct">0%</span></div>
   <div class="preloader__bar"><div class="preloader__fill" id="preloaderFill"></div></div>
 </div>
@@ -49,31 +26,6 @@
 
 <!-- ══════════ NAV ══════════ -->
 <header class="nav">
-  <a class="nav__mark" href="#top" aria-label="Kevin Costner - home">
-    <span class="nav__mark-stage">
-      <span class="nav__mark-flip">
-        <svg class="nav__mark-icon" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <defs>
-            <linearGradient id="navBlingGrad" gradientUnits="userSpaceOnUse" x1="-40" y1="-40" x2="0" y2="0">
-              <stop offset="0%"   stop-color="#F2EBDD"/>
-              <stop offset="42%"  stop-color="#F2EBDD"/>
-              <stop offset="50%"  stop-color="#ffffff"/>
-              <stop offset="58%"  stop-color="#F2EBDD"/>
-              <stop offset="100%" stop-color="#F2EBDD"/>
-              <animateTransform attributeName="gradientTransform" type="translate"
-                values="-90 -90; 0 0; 150 150; 150 150" keyTimes="0; 0.15; 0.55; 1"
-                dur="2.6s" repeatCount="indefinite"/>
-            </linearGradient>
-          </defs>
-          <path d="M14 10 L14 54 M14 34 L38 10 M14 34 L40 54" stroke="url(#navBlingGrad)" stroke-width="7" stroke-linecap="square" stroke-linejoin="miter"/>
-          <path d="M40 54 L50 54 L50 34 L40 34" stroke="url(#navBlingGrad)" stroke-width="7" stroke-linecap="square" stroke-linejoin="miter" fill="none"/>
-        </svg>
-      </span>
-      <span class="nav__spark nav__spark--a">✦</span>
-      <span class="nav__spark nav__spark--b">✦</span>
-      <span class="nav__spark nav__spark--c">✦</span>
-    </span>
-  </a>
   <nav class="nav__links">
     <a href="#about">About</a>
     <a href="#experience">Experience</a>
@@ -130,11 +82,11 @@
   <!-- ══════════ ACT II · THREE PILLARS ══════════ -->
   <section class="pillars" id="pillars">
     <div class="pillars__pin">
-      <video class="bgvideo" id="builderVideo" muted loop playsinline preload="metadata"></video>
+      <video class="bgvideo" id="builderVideo" muted loop playsinline preload="auto"></video>
+      <div class="pillars__blue" aria-hidden="true"></div>
       <div class="scrim"></div>
 
       <div class="pillars__stage">
-        <p class="section-eyebrow mono">WHAT I BUILD WITH</p>
         <div class="pillar" data-pillar="0">
           <h2 class="pillar__title">Agentic<br>RAG</h2>
           <p class="pillar__line">Autonomous agents that decide when to retrieve, then ground answers in document context.</p>
@@ -218,7 +170,7 @@
 
   <!-- ══════════ ACT III · WORK ══════════ -->
   <section class="work" id="work">
-    <video class="bgvideo bgvideo--fixedish" id="closerVideo" muted loop playsinline preload="metadata"></video>
+    <video class="bgvideo bgvideo--fixedish" id="closerVideo" muted loop playsinline preload="auto"></video>
     <div class="scrim scrim--work"></div>
 
     <div class="work__inner">
@@ -408,6 +360,6 @@
 <script src="vendor/lenis.min.js"></script>
 <script src="vendor/gsap.min.js"></script>
 <script src="vendor/ScrollTrigger.min.js"></script>
-<script src="js/main.js"></script>
+<script src="js/main.js?v=hq1"></script>
 </body>
 </html>

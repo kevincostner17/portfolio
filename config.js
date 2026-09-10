@@ -8,8 +8,8 @@ window.PORTFOLIO_CONFIG = {
     closer:  "assets/closer.mp4",
   },
   localFallbacks: {
-    builder: "assets/placeholder-glow.mp4",
-    closer:  "assets/placeholder-glow.mp4",
+    builder: "assets/builder.mp4",
+    closer:  "assets/closer.mp4",
   },
   links: {
     linkedin: "https://linkedin.com/in/kevin-costner-4a2173368",

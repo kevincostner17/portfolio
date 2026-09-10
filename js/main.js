@@ -110,16 +110,35 @@
       if (p && p.catch) p.catch(() => {/* autoplay blocked until interaction */});
     };
     el.addEventListener("error", () => {
-      if (!usedFallback && fallback) {
+      if (!usedFallback && fallback && fallback !== el.getAttribute("src")) {
         usedFallback = true;
         el.src = fallback;
         el.load();
         tryPlay();
       }
     }, true);
-    el.addEventListener("loadeddata", tryPlay, { once: true });
-    el.src = primary || fallback || "";
+    el.addEventListener("loadeddata", tryPlay);
+    el.addEventListener("canplay", tryPlay);
+    // Cache-bust so replaced mp4s load immediately
+    const bust = primary ? primary + (primary.includes("?") ? "&" : "?") + "v=hq1" : "";
+    el.muted = true;
+    el.playsInline = true;
+    el.setAttribute("playsinline", "");
+    el.src = bust || fallback || "";
     el.load();
+    tryPlay();
+    if (autoplay && "IntersectionObserver" in window) {
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) tryPlay();
+            else el.pause();
+          });
+        },
+        { threshold: 0.15 }
+      );
+      io.observe(el);
+    }
   };
   attachVideo(document.getElementById("builderVideo"), "builder", { autoplay: true });
   attachVideo(document.getElementById("closerVideo"), "closer", { autoplay: true });
@@ -159,10 +178,34 @@
     /* Hero intro: letters rise in as soon as the preloader clears */
     const playHeroIntro = () => {
       gsap.fromTo(
-        [heroEyebrow, heroLetters, heroSubtitle],
-        { opacity: 0.4, y: 10 },
-        { opacity: 1, y: 0, duration: 0.7, ease: "power3.out", stagger: 0.02, overwrite: true }
+        heroEyebrow,
+        { opacity: 0, y: 16 },
+        { opacity: 1, y: 0, duration: 0.65, ease: "power3.out", overwrite: true }
       );
+      gsap.fromTo(
+        heroLetters,
+        { opacity: 0, y: 36, rotateX: -18 },
+        {
+          opacity: 1, y: 0, rotateX: 0,
+          duration: 0.9, ease: "power3.out",
+          stagger: 0.028, delay: 0.08, overwrite: true,
+        }
+      );
+      gsap.fromTo(
+        heroSubtitle,
+        { opacity: 0, y: 14, letterSpacing: "0.85em" },
+        {
+          opacity: 1, y: 0, letterSpacing: "0.55em",
+          duration: 0.85, ease: "power2.out", delay: 0.35, overwrite: true,
+        }
+      );
+      if (heroHint) {
+        gsap.fromTo(
+          heroHint,
+          { opacity: 0, y: 10 },
+          { opacity: 1, y: 0, duration: 0.6, ease: "power2.out", delay: 0.55, overwrite: true }
+        );
+      }
     };
     onPreloaderDone = playHeroIntro;
     if (preloaderDone) playHeroIntro(); // preloader may have beaten us here
@@ -173,16 +216,21 @@
         trigger: "#hero",
         start: "top top",
         end: "bottom bottom",
-        scrub: true,
+        scrub: 0.65,
       },
     });
     if (heroImage) {
-      heroTl.fromTo(heroImage, { scale: 1.04 }, { scale: 1.12, ease: "none", duration: 1 }, 0);
+      heroTl.fromTo(
+        heroImage,
+        { scale: 1.04, yPercent: 0 },
+        { scale: 1.16, yPercent: -3, ease: "none", duration: 1 },
+        0
+      );
     }
     heroTl
-      .to(heroHint, { opacity: 0, duration: 0.08, immediateRender: false }, 0.06)
-      .to("#heroTitle", { scale: 0.94, yPercent: -4, ease: "none", duration: 0.4 }, 0.55)
-      .to([heroEyebrow, heroSubtitle], { opacity: 0, duration: 0.15, immediateRender: false }, 0.82);
+      .to(heroHint, { opacity: 0, duration: 0.1, immediateRender: false }, 0.04)
+      .to("#heroTitle", { scale: 0.9, yPercent: -8, ease: "none", duration: 0.45 }, 0.48)
+      .to([heroEyebrow, heroSubtitle], { opacity: 0, duration: 0.18, immediateRender: false }, 0.78);
 
     /* Stats: count up when the strip enters */
     document.querySelectorAll(".stat").forEach((stat) => {
