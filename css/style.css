@@ -113,18 +113,22 @@ a { color: inherit; text-decoration: none; }
 }
 .nav__links {
   display: flex; gap: clamp(18px, 3vw, 40px);
-  mix-blend-mode: difference;
 }
 .nav__links a {
   font-family: var(--mono);
   font-size: 11px; letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: #FFFFFF;
   position: relative;
+  color: #C5A572;
+  transition: color 0.25s ease;
+}
+.nav__links a:hover,
+.nav__links a:focus-visible {
+  color: #E0C48A;
 }
 .nav__links a::after {
   content: ""; position: absolute; left: 0; bottom: -6px;
-  width: 100%; height: 1px; background: #FFFFFF;
+  width: 100%; height: 1px; background: #C5A572;
   transform: scaleX(0); transform-origin: right;
   transition: transform 0.35s cubic-bezier(0.65, 0, 0.35, 1);
 }

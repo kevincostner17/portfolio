@@ -14,7 +14,6 @@ window.PORTFOLIO_CONFIG = {
   links: {
     linkedin: "https://linkedin.com/in/kevin-costner-4a2173368",
     github:   "https://github.com/kevincostner17",
-    facebook: "https://g2c-tau.vercel.app",
     email:    "mailto:siravenikevin@gmail.com",
   },
 };

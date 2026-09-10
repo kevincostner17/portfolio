@@ -21,7 +21,6 @@
   };
   setHref("linkLinkedin", L.linkedin);
   setHref("linkGithub", L.github);
-  setHref("linkFacebook", L.facebook);
   setHref("linkEmail", L.email);
   setHref("btnEmail", L.email);
   setHref("btnGithub", L.github);
