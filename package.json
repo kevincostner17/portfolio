@@ -1,0 +1,8 @@
+{
+  "name": "kevin-costner-portfolio",
+  "private": true,
+  "scripts": {
+    "build": "echo static",
+    "vercel-build": "echo static"
+  }
+}
