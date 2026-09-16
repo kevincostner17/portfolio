@@ -15,5 +15,6 @@ window.PORTFOLIO_CONFIG = {
     linkedin: "https://linkedin.com/in/kevin-costner-4a2173368",
     github:   "https://github.com/kevincostner17",
     email:    "mailto:siravenikevin@gmail.com",
+    portfolio:"https://kevin-costner-portfolio.vercel.app",
   },
 };
