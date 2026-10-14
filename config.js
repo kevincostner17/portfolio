@@ -16,5 +16,6 @@ window.PORTFOLIO_CONFIG = {
     github:   "https://github.com/kevincostner17",
     email:    "mailto:siravenikevin@gmail.com",
     portfolio:"https://kevin-costner-portfolio.vercel.app",
+    kaggle:   "https://www.kaggle.com/competitions/gemma-4-developer-agent/leaderboard",
   },
 };

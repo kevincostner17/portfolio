@@ -998,3 +998,56 @@ a { color: inherit; text-decoration: none; }
 
 /* ── BADGE: calmer tracking, textLength owns the spacing ───── */
 .orbit-badge__text { letter-spacing: 0.05em; }
+
+/* ── ACHIEVEMENTS: navy band, big accent numbers ───────────── */
+.achv {
+  --cream: #FFFFFF;
+  --cream-dim: rgba(255, 255, 255, 0.7);
+  --hairline: rgba(255, 255, 255, 0.16);
+  background: var(--navy);
+  color: #FFFFFF;
+  padding: clamp(80px, 12vh, 150px) clamp(20px, 6vw, 96px);
+  display: flex; flex-direction: column; align-items: center;
+}
+.achv .section-eyebrow { text-align: center; }
+.achv__heading {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(44px, 7vw, 110px);
+  line-height: 0.95;
+  text-transform: uppercase;
+  text-align: center;
+  margin-bottom: clamp(36px, 6vh, 72px);
+}
+.achv__grid {
+  width: 100%;
+  max-width: 1180px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: clamp(14px, 1.6vw, 22px);
+}
+.achv__tile {
+  display: flex; flex-direction: column; gap: 10px;
+  min-width: 0;
+  padding: clamp(22px, 2.4vw, 32px);
+  border: 1px solid var(--hairline);
+  background: rgba(255, 255, 255, 0.04);
+  color: inherit;
+  text-decoration: none;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.35s, background 0.35s;
+}
+a.achv__tile:hover, a.achv__tile:focus-visible {
+  transform: translateY(-6px);
+  border-color: var(--emerald);
+  background: rgba(0, 102, 255, 0.12);
+}
+.achv__num {
+  font-family: var(--display);
+  font-size: clamp(52px, 5.4vw, 80px);
+  line-height: 1;
+  color: var(--emerald);
+}
+.achv__num small { font-size: 0.42em; margin-left: 4px; color: var(--cream-dim); }
+.achv__name { font-family: var(--body); font-weight: 600; font-size: clamp(16px, 1.3vw, 19px); }
+.achv__for { color: var(--cream-dim); font-size: 14px; flex: 1; }
+.achv__cta { font-size: 9.5px; letter-spacing: 0.2em; color: var(--emerald); }

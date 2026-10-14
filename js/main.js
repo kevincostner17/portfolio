@@ -22,6 +22,7 @@
   setHref("linkLinkedin", L.linkedin);
   setHref("linkGithub", L.github);
   setHref("linkEmail", L.email);
+  setHref("linkKaggle", L.kaggle);
   setHref("btnEmail", L.email);
   setHref("btnGithub", L.github);
 
@@ -261,7 +262,7 @@
 
     /* Pillars: three sequential reveals over the builder clip */
     const pillars = gsap.utils.toArray(".pillar");
-    const pillarNames = ["AGENTIC RAG", "MACHINE LEARNING", "FULL-STACK SHIPPING"];
+    const pillarNames = ["RAG SYSTEMS", "MACHINE LEARNING", "OPEN SOURCE"];
     const pillarIndexEl = document.getElementById("pillarCurrent");
     const pillarsTl = gsap.timeline({
       scrollTrigger: {
